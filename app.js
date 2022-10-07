@@ -27,10 +27,11 @@ function showNotes() {
   } else {
     notesObj = JSON.parse(notes);
   }
+
   let html = "";
   notesObj.forEach(function(element, index) {
     html += `
-            <div class="noteCard my-2 mx-2 card" style="width: 18rem;">
+            <div class="noteCard my-2 mx-2 card" style="width: 18rem; box-shadow: 0 0 10px #333">
                     <div class="card-body">
                         <h5 class="card-title">Note ${index + 1}</h5>
                         <p class="card-text"> ${element}</p>
@@ -38,6 +39,7 @@ function showNotes() {
                     </div>
                 </div>`;
   });
+
   let notesElm = document.getElementById("notes");
   if (notesObj.length != 0) {
     notesElm.innerHTML = html;
