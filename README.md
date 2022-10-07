@@ -4,7 +4,7 @@ This is a magic notes and sticky tools website to enhance user readability.
 
 # Functionality
 
-This web app function similar to Google's Keep Notes, providing the functionality to add notes.
+This web app function is similar to Google's Keep Notes, providing the functionality to add notes.
 
 ![plain](https://user-images.githubusercontent.com/74847740/194505971-ecd09489-e966-42b7-bff9-2f559d5dfe44.png)
 
