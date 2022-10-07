@@ -1,19 +1,19 @@
-# Magic-Notes
+# Magic Notes
 
 This is a magic notes and sticky tools website to enhance user readability.
 
-# Functionality
+## Preview
 
-This web app function is similar to Google's Keep Notes, providing the functionality to add notes.
+You can view a live demo of this software here: https://shubhamkrsingh21.github.io/Magic-Notes/
 
-![plain](https://user-images.githubusercontent.com/74847740/194505971-ecd09489-e966-42b7-bff9-2f559d5dfe44.png)
+![image](https://user-images.githubusercontent.com/58097612/194622645-a0421d4a-4bd4-4314-9e07-79e2a7d81fbe.png)
+
+## Functionality
+
+This web application function similar to Google's Keep Notes, providing the functionality to add notes.
+
+![image](https://user-images.githubusercontent.com/58097612/194623061-3eed749b-48b7-41f2-bade-b4a9c7d9acda.png)
 
 Apart from adding notes, user can even delete the notes once completed. All the notes are stored in local storage of the browser.
 
-![Picsart_22-10-07_13-36-17-774](https://user-images.githubusercontent.com/74847740/194506263-74439d6c-b939-45af-803b-09a65e35349d.png)
-
-Thank You!
-
-Regards
-
-Shubham kumar Singh
+![image](https://user-images.githubusercontent.com/58097612/194623138-93d557f0-ca74-4b37-adec-654500960147.png)
