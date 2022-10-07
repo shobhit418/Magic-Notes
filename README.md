@@ -22,4 +22,7 @@ Apart from adding notes, user can even delete the notes once completed. All the 
 ![Picsart_22-10-07_13-36-17-774](https://user-images.githubusercontent.com/74847740/194506263-74439d6c-b939-45af-803b-09a65e35349d.png)
 
 
-Thank You
+Thank You!
+
+Regards
+Shubham Singh
