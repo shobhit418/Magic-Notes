@@ -1,98 +1,114 @@
-console.log("Welcome to notes app. This is app.js");
-showNotes();
-let addBtn = document.getElementById("addBtn");
-let addTxt = document.getElementById("addTxt");
-// Initially disable the button when there is no text
-addBtn.disabled = true;
+const NOTES_LOCAL_STORAGE_KEY = "notes";
 
-// Function to disable the addBtn
-const disableBtn = () => {
-  let inputValue = addTxt.value;
-  inputValue = inputValue.trim();
-  addBtn.disabled = inputValue.length ? false : true;
-};
+class Note {
+    constructor(content = "") {
+        this.uuid = crypto.randomUUID();
+        this.content = content;
+    }
 
-// Checking the input of addTxt to enable/disbale the addBtn
-addTxt.addEventListener("input", (e) => {
-  disableBtn();
-});
+    /**
+     * This function creates a Note object from an object. This is useful for converting the response from JSON.parse
+     * into a usable Note object.
+     * @param {Object} obj - The object to convert to a Note object.
+     * @returns {Note} A Note with the properties of the given object.
+     * @example
+     *   Note.fromObj({uuid: "00000000-0000-4000-0000-000000000000", content: "Some text"})
+     */
+    static fromObj(obj) {
+        return Object.assign(new Note(), obj);
+    }
+}
 
-// If user adds a note, add it to the localStorage
-addBtn.addEventListener("click", function (e) {
-  let notes = localStorage.getItem("notes");
-  if (notes == null) {
-    notesObj = [];
-  } else {
-    notesObj = JSON.parse(notes);
-  }
-  notesObj.push(addTxt.value);
-  localStorage.setItem("notes", JSON.stringify(notesObj));
-  addTxt.value = "";
-  disableBtn();
-  //   console.log(notesObj);
-  showNotes();
-});
+/**
+ * This function gets notes from local storage
+ * @returns {Array.<Note>} An array of Note objects.
+ */
+function getNotes() {
+    const jsonObjs = localStorage.getItem(NOTES_LOCAL_STORAGE_KEY) || "[]";
+    const objs = JSON.parse(jsonObjs);
+    return objs.map((obj) => Note.fromObj(obj));
+}
 
-// Function to show elements from localStorage
-function showNotes() {
-  let notes = localStorage.getItem("notes");
-  if (notes == null) {
-    notesObj = [];
-  } else {
-    notesObj = JSON.parse(notes);
-  }
+/**
+ * This function saves an array of Note objects to local storage
+ * @param {Array.<Note>} notes - The notes array that we want to save to local storage.
+ */
+function saveNotes(notes) {
+    const jsonNotes = JSON.stringify(notes);
+    localStorage.setItem(NOTES_LOCAL_STORAGE_KEY, jsonNotes);
+}
 
-  let html = "";
-  notesObj.forEach(function (element, index) {
-    html += `
-            <div class="noteCard my-2 mx-2 card" style="width: 18rem; box-shadow: 0 0 10px #333">
+/**
+ * This function saves a new note to local storage
+ * @param {Note} note - The note to add to the list of notes.
+ */
+function saveNewNote(note) {
+    const notes = getNotes();
+    notes.push(note);
+    saveNotes(notes);
+}
+
+/**
+ * This function removes any note referenced by the given uuid from local storage and updates the visible notes.
+ * @param {string} uuid - The uuid of the note to remove.
+ */
+function deleteNote(uuid) {
+    const notes = getNotes();
+    const newNotes = notes.filter((note) => note.uuid !== uuid);
+    saveNotes(newNotes);
+    updateDisplayedNotes();
+}
+
+/**
+ * This function displays the notes (filtered by search text) on the page
+ */
+function updateDisplayedNotes() {
+    const searchText = document.getElementById("searchTxt").value;
+    const notes = getNotes();
+    const matchedNotes = notes.filter((note) => note.content.includes(searchText.toLowerCase()));
+
+    const notesContainerEle = document.getElementById("notes");
+
+    if (matchedNotes.length === 0) {
+        notesContainerEle.innerHTML = `Nothing to show! Use "Add a Note" section above to add notes.`;
+    } else {
+        const notesHtml = matchedNotes.map(function (note, index) {
+            return `
+                <div class="noteCard my-2 mx-2 card" style="width: 18rem; box-shadow: 0 0 10px #333">
                     <div class="card-body">
                         <h5 class="card-title">Note ${index + 1}</h5>
-                        <p class="card-text"> ${element}</p>
-                        <button id="${index}"onclick="deleteNote(this.id)" class="btn btn-primary">Delete Note</button>
+                        <p class="card-text"> ${note.content}</p>
+                        <button id="${note.uuid}"onclick="deleteNote(this.id)" class="btn btn-primary">Delete Note</button>
                     </div>
                 </div>`;
-  });
-
-  let notesElm = document.getElementById("notes");
-  if (notesObj.length != 0) {
-    notesElm.innerHTML = html;
-  } else {
-    notesElm.innerHTML = `Nothing to show! Use "Add a Note" section above to add notes.`;
-  }
-}
-
-// Function to delete a note
-function deleteNote(index) {
-  //   console.log("I am deleting", index);
-
-  let notes = localStorage.getItem("notes");
-  if (notes == null) {
-    notesObj = [];
-  } else {
-    notesObj = JSON.parse(notes);
-  }
-
-  notesObj.splice(index, 1);
-  localStorage.setItem("notes", JSON.stringify(notesObj));
-  showNotes();
-}
-
-let search = document.getElementById("searchTxt");
-search.addEventListener("input", function () {
-  let inputVal = search.value.toLowerCase();
-  // console.log('Input event fired!', inputVal);
-  let noteCards = document.getElementsByClassName("noteCard");
-  Array.from(noteCards).forEach(function (element) {
-    let cardTxt = element.getElementsByTagName("p")[0].innerText.toLowerCase();
-    if (cardTxt.includes(inputVal)) {
-      element.style.display = "block";
-    } else {
-      element.style.display = "none";
+        });
+        notesContainerEle.innerHTML = notesHtml.join("\n");
     }
-    // console.log(cardTxt);
-  });
+}
+
+// Enables/disables the add button when the input field is updated
+document.getElementById("addTxt").addEventListener("input", (e) => {
+    const trimmedInputText = e.target.value.trim();
+    document.getElementById("addBtn").disabled = trimmedInputText.length === 0;
 });
+
+// Adds a new note when the add button is clicked
+document.getElementById("addBtn").addEventListener("click", (e) => {
+    e.target.disabled = true;
+    const noteContent = document.getElementById("addTxt").value;
+    const note = new Note(noteContent);
+    saveNewNote(note);
+    document.getElementById("addTxt").value = "";
+    updateDisplayedNotes();
+});
+
+// Updates the visible notes when the search field is updated
+document.getElementById("searchTxt").addEventListener("input", () => {
+    updateDisplayedNotes();
+});
+
+console.log("Welcome to notes app. This is app.js");
+updateDisplayedNotes();  // Initialize with saved notes
 
 /*
 Further Features:
