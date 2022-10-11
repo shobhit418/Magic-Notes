@@ -60,6 +60,14 @@ function deleteNote(uuid) {
 }
 
 /**
+ * This function delete all notes from the page.
+ */
+function deleteAllNotes() {
+    saveNotes([]);
+    updateDisplayedNotes();
+}
+
+/**
  * This function displays the notes (filtered by search text) on the page
  */
 function updateDisplayedNotes() {
@@ -71,6 +79,7 @@ function updateDisplayedNotes() {
 
     if (matchedNotes.length === 0) {
         notesContainerEle.innerHTML = `Nothing to show! Use "Add a Note" section above to add notes.`;
+        document.getElementById('delAllBtn').disabled = true;
     } else {
         const notesHtml = matchedNotes.map(function (note, index) {
             return `
@@ -82,6 +91,7 @@ function updateDisplayedNotes() {
                     </div>
                 </div>`;
         });
+        document.getElementById('delAllBtn').disabled = false;
         notesContainerEle.innerHTML = notesHtml.join("\n");
     }
 }
@@ -105,6 +115,18 @@ document.getElementById("addBtn").addEventListener("click", (e) => {
 // Updates the visible notes when the search field is updated
 document.getElementById("searchTxt").addEventListener("input", () => {
     updateDisplayedNotes();
+});
+
+/** 
+ * Deletes all notes when the delete all button is triggered.
+ * Confirms with a prompt that requires to enter the word delete 
+ * If failed, alerts with the error message.
+ */
+document.getElementById('delAllBtn').addEventListener('click', () => {
+    const isDelete = prompt("Alert! You are about to remove all your notes. Type in \"delete\" to confirm.") === 'delete';
+    if(isDelete) return deleteAllNotes();
+
+    alert("Couldn't proceed. WARNING: case-sensitive");
 });
 
 console.log("Welcome to notes app. This is app.js");
