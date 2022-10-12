@@ -146,7 +146,7 @@ function changeColor(string) {
     else if(button.value == "btn3"){
       currentColor = "rgb(255, 105, 180)";
     }
-    showNotes();
+    updateDisplayedNotes();
 }
 
 /*
