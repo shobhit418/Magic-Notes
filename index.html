@@ -8,6 +8,7 @@
     <title>Notes App</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link href="style.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -37,11 +38,17 @@
         <h1>WELCOME TO THE MAGIC NOTES </h1>
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Add a Note</h5>
-                <div class="form-group">
-                    <textarea class="form-control" id="addTxt" rows="3"></textarea>
+                <h4 class="card-title">Add a Note</h4>
+                <div class="color-select-group">
+                    <div class="select-text">Select Color: </div>
+                    <button id="btn1" class="color-button" onclick="changeColor('btn1')" value="btn1"></button>
+                    <button id="btn2" class="color-button" onclick="changeColor('btn2')" value="btn2"></button>
+                    <button id="btn3" class="color-button" onclick="changeColor('btn3')" value="btn3"></button>
                 </div>
-                <button class="btn btn-primary" id="addBtn">Add note</button>
+                <div class="form-group">
+                    <textarea class="form-control" id="addTxt" rows="3"></textarea><br>
+                </div>
+                <button class="btn btn-primary" id="addBtn">Add Note</button>
             </div>
         </div>
         <h1>YOUR NOTES here</h1>
