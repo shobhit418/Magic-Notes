@@ -25,12 +25,10 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#">Home</a>
                     </li>
-
                 </ul>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
+                <div class="d-flex">
+                    <input id="searchTxt" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                </div>
             </div>
         </div>
     </nav>
@@ -48,21 +46,17 @@
                 <div class="form-group">
                     <textarea class="form-control" id="addTxt" rows="3"></textarea><br>
                 </div>
-                <button class="btn btn-primary" id="addBtn">Add Note</button>
+                <button style="margin: 10px 0" class="btn btn-primary" id="addBtn" disabled>Add note</button>
             </div>
         </div>
-        <h1>YOUR NOTES here</h1>
+        <div>
+            <h1>YOUR NOTES here</h1>
+             <button style="margin: 10px 0" class="btn btn-primary" id="delAllBtn">Delete all notes</button>
+        </div>
         <hr>
-        <div id="notes" class="row container-fluid">
-        <div class="noteCard my-2 mx-2 card" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">Note</h5>
-                <p class="card-text"></p>
-                <a href="#" class="btn btn-primary">Delete</a>
-            </div>
-        </div>
-    </div>
 
+        <!-- All notes here -->
+        <div id="notes" class="row container-fluid"></div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
