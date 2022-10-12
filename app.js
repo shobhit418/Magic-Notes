@@ -1,4 +1,5 @@
 const NOTES_LOCAL_STORAGE_KEY = "notes";
+var currentColor = "rgb(255, 255, 255)";
 
 class Note {
     constructor(content = "") {
@@ -6,7 +7,6 @@ class Note {
         this.content = content;
     }
 
-var currentColor = "rgb(255, 255, 255)";
 
     /**
      * This function creates a Note object from an object. This is useful for converting the response from JSON.parse
@@ -85,7 +85,7 @@ function updateDisplayedNotes() {
     } else {
         const notesHtml = matchedNotes.map(function (note, index) {
             return `
-                <div class="noteCard my-2 mx-2 card" style="width: 18rem; box-shadow: 0 0 10px #333">
+            <div class="noteCard my-2 mx-2 card" style="width: 18rem; box-shadow: 0 0 10px #333; background-color: ${currentColor};">
                     <div class="card-body">
                         <h5 class="card-title">Note ${index + 1}</h5>
                         <p class="card-text"> ${note.content}</p>
@@ -133,21 +133,6 @@ document.getElementById('delAllBtn').addEventListener('click', () => {
 
 console.log("Welcome to notes app. This is app.js");
 updateDisplayedNotes();  // Initialize with saved notes
-
-function changeColor(string) {
-    var button = document.getElementById(string);
-
-    if(button.value == "btn1"){
-      currentColor = "rgb(0, 255, 255)";
-    }
-    else if(button.value == "btn2"){
-      currentColor = "rgb(255, 215, 0)";
-    }
-    else if(button.value == "btn3"){
-      currentColor = "rgb(255, 105, 180)";
-    }
-    showNotes();
-}
 
 function changeColor(string) {
     var button = document.getElementById(string);
