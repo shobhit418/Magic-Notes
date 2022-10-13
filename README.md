@@ -1,6 +1,6 @@
 # Magic Notes
 
-This here is magic notes and sticky tools website to enhance user readability.
+This here is the magic notes and sticky tools website to enhance user readability.
 
 ## Preview
 
@@ -14,6 +14,6 @@ This web application function similar to Google's Keep Notes, providing the func
 
 ![image](https://user-images.githubusercontent.com/58097612/194623061-3eed749b-48b7-41f2-bade-b4a9c7d9acda.png)
 
-Apart from adding notes, user can even delete the notes once completed. All the notes are stored in local storage of the browser.
+Apart from adding notes, user can even delete the notes once Completed . All the notes are stored in local storage of the browser.
 
 ![image](https://user-images.githubusercontent.com/58097612/194623138-93d557f0-ca74-4b37-adec-654500960147.png)
