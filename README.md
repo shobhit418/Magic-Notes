@@ -4,7 +4,7 @@ This here is the magic notes and sticky tools website to enhance user readabilit
 
 ## Preview
 
-You can view a live demo of this software here: https://shubhamkrsingh21.github.io/Magic-Notes/
+You can view a live demo of this is software here: https://shubhamkrsingh21.github.io/Magic-Notes/
 
 ![image](https://user-images.githubusercontent.com/58097612/194622645-a0421d4a-4bd4-4314-9e07-79e2a7d81fbe.png)
 
